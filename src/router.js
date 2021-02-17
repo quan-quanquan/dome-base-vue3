@@ -1,6 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router'
 
-import VirtualScroll from './pages/virtual-scroll'
+import VirtualScroll from '@/pages/virtual-scroll'
 
 const routes = [
   {
