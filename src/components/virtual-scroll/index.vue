@@ -8,14 +8,17 @@
       class="place-top"
       :style="{height: topHeight + 'px'}"
     ></div>
-    <!-- <div v-for="item in items" :key="item.id">
+    <div
+      class="list-item"
+      v-for="item in items" 
+      :key="item.id"
+      :style="{
+        height: itemHeight + 'px'
+      }"
+    >
       <slot :data="item">
       </slot>
-    </div> -->
-    <div 
-      class="content"
-      :style="{height: height + 'px'}" 
-    ></div>
+    </div>
     <div 
       class="place-bottom"
       :style="{height: bottomHeight + 'px'}"
@@ -32,31 +35,58 @@ export default {
     height: {
       type: Number,
       default: () => 300
+    },
+    itemHeight: {
+      type: Number,
+      default: () => 35
     }
   },
   data () {
     return {
-      items: [],
-      scrollTop: 0
+      scrollTop: 0,
+      scrollItem: true
     }
   },
   computed: {
+    startIndex() {
+      return Math.floor(this.scrollTop/this.itemHeight)
+    },
+    endIndex() {
+      let index = Math.ceil((this.scrollTop + this.height)/this.itemHeight)
+      return Math.min(index, this.listData.length - 1)
+    },
+    items() {
+      let s = this.startIndex
+      let e = this.endIndex
+      let items = []
+      for (let i = s; i < this.listData.length && i <= e; i++) {
+        items.push(this.listData[i])
+      }
+      return items
+    },
     dataHeight() {
-      return 1000
+      return this.listData.length * this.itemHeight
     },
     topHeight() {
-      return this.scrollTop
+      return this.startIndex * this.itemHeight
     },
     bottomHeight() {
-      return this.dataHeight - this.scrollTop - this.height
+      if (this.endIndex === this.listData.length - 1) return 0
+      return this.dataHeight - this.topHeight - this.height
     }
+  },
+  mounted() {
+  },
+  watch: {
   },
   methods: {
     handleScroll(e) {
-      this.scrollTop = e.target.scrollTop
-      this.$nextTick(() => {
-        e.target.scrollTop = this.scrollTop
-      })
+      window.requestAnimationFrame(() => {
+        this.scrollTop = e.target.scrollTop
+        this.$nextTick(() => {   
+          e.target.scrollTop = this.scrollTop
+        })
+      }) 
     }
   }
 }
@@ -75,5 +105,14 @@ export default {
   .place-bottom {
     background: brown;
   }
+  .list-item {
+    &:nth-child(odd) {
+      background: cadetblue;
+    }
+    &:nth-child(even) {
+      background: coral;
+    }
+  }
+  
 }
 </style>
