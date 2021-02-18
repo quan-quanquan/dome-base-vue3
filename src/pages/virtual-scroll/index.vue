@@ -1,6 +1,5 @@
 <template>
   <div>
-    虚拟滚动b
     <virtual-scroll></virtual-scroll>
   </div>
 </template>
