@@ -7,6 +7,9 @@
       <a-menu-item key="richEditor">
         <router-link to="/rich-editor">富文本</router-link>
       </a-menu-item>
+      <a-menu-item key="particleMovement">
+        <router-link to="/particle-movement">粒子运动</router-link>
+      </a-menu-item>
     </a-menu>
     <router-view></router-view>
   </div>
