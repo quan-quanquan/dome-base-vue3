@@ -1,6 +1,8 @@
 <template>
   <div>
+    
     <router-link to="/virtual-scroll">虚拟滚动</router-link>
+    <router-link to="/rich-editor">富文本</router-link>
     <router-view></router-view>
   </div>
 </template>
