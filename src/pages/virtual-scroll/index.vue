@@ -1,7 +1,5 @@
 <template>
   <div>
-<<<<<<< HEAD
-    虚拟滚动b
     <virtual-scroll
       :listData=data
     >
@@ -14,9 +12,6 @@
         </div>
       </template>
     </virtual-scroll>
-=======
-    <virtual-scroll></virtual-scroll>
->>>>>>> 10af86fef25bd405d8346dce9dde5d6927472595
   </div>
 </template>
 <script>
